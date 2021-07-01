@@ -33,7 +33,7 @@ void loop() {
   FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
   FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
 
-  // re-arrange FFT result to match with no. of columns on display ( xres )
+  // re-arrange FFT result to match with rgb
   int step = (SAMPLES / 2) / rgb;
   int c = 0;
   for (int i=0;i<(SAMPLES/2);i+=step)
@@ -45,7 +45,8 @@ void loop() {
     data_avgs[c]=data_avgs[c]/step;
     c++;
   }
-
+  
+  //Controlling the LED strip
   for (int i = 0; i < rgb; i++){
     data_avgs[i] = constrain(data_avgs[i], 0, 40);
     data_avgs[i] = map(data_avgs[i], 0, 40, 0, 255);
