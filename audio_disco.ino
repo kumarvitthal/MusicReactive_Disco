@@ -6,9 +6,9 @@
 #define bled 11
 double vReal[SAMPLES];
 double vImag[SAMPLES];
-//char data_avgs[rgb];
 int glow;
 arduinoFFT FFT = arduinoFFT();
+
 void setup() {
   ADCSRA = 0b11100101;    // set ADC to free running mode and set pre-scalar to 32 (0xe5)
   ADMUX = 0b00000000;     // use pin A0 and external voltage reference
@@ -36,6 +36,7 @@ void loop() {
   FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
   FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
 
+  //LED control
   for (int i = 0; i < SAMPLES/2; i++){
     vReal[i] = constrain(vReal[i], 0, 40);
     vReal[i] = map(vReal[i], 0, 40, 0, 255);
