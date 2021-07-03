@@ -4,6 +4,7 @@
 #define rled 5
 #define gled 9
 #define bled 11
+#define power 2
 double vReal[SAMPLES];
 double vImag[SAMPLES];
 char data_avgs[rgb];
@@ -12,9 +13,12 @@ arduinoFFT FFT = arduinoFFT();
 void setup() {
   ADCSRA = 0b11100101;    // set ADC to free running mode and set pre-scalar to 32 (0xe5)
   ADMUX = 0b00000000;     // use pin A0 and external voltage reference  
+  pinMode(power,OUTPUT);
   pinMode(rled,OUTPUT);
   pinMode(gled,OUTPUT);
   pinMode(bled,OUTPUT);
+  digitalWrite(power, HIGH);
+  Serial.begin(115200);
 }
 void loop() {
   
