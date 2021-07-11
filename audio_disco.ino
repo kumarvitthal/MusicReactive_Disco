@@ -24,7 +24,7 @@ void loop() {
 //    while (!(ADCSRA & 0x10));   // wait for ADC to complete current conversion ie ADIF bit set
 //    ADCSRA = 0b11110101 ;       // clear ADIF bit so that ADC can do next operation (0xf5)
 //    int value = ADC - 512 ;     // Read from ADC and subtract DC offset caused value
-    int value = 512-analogRead(0)  ;
+    int value = analogRead(0)-512  ;
     vReal[i] = value;           
     vImag[i] = 0;
     //Serial.println(value);
